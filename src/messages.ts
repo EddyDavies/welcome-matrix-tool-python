@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { sendMessage, getEvent } from "./matrixClientRequests";
+import { sendMessage, getEvent, getRoomEvents } from "./matrixClientRequests";
 import { PERSON_NAME, ROLE_NAME, PSEUDO_STATE_EVENT_TYPE } from "./constants";
 import { getPseudoState, setPseudoState } from "./pseudoState";
 
@@ -13,6 +13,19 @@ const hello = async (roomId: string) => {
     React to this message with:\n
     ❤️ to see the current assigned roles\n
     👍 to assign a role to someone`
+  );
+};
+
+export const greetNewJoiner = async (event, room) => {
+  const { room_id, event_id, content } = event.event;
+
+  const roomId = room_id
+  const roomName = room.name
+  const senderName = content?.displayname
+
+  sendMessage(
+    room_id,
+    `Hi welcome ${senderName} to the ${roomName} chat! Would you mind introducing yourself? 👋`
   );
 };
 

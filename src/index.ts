@@ -1,8 +1,10 @@
 import "dotenv/config";
 import * as sdk from "matrix-js-sdk";
 import { RoomEvent, ClientEvent } from "matrix-js-sdk";
-import handleMessage from "./messages";
+import handleMessage, { greetNewJoiner } from "./messages";
 import handleReaction from "./reactions";
+
+const DEBUG = process.env.DEBUG
 
 const { homeserver, access_token, userId, whatsAppRoomId } = process.env;
 
@@ -17,7 +19,7 @@ const start = async () => {
 
   client.once(ClientEvent.Sync, async (state, prevState, res) => {
     // state will be 'PREPARED' when the client is ready to use
-    console.log(state);
+    DEBUG && console.log(state);
   });
 
   const scriptStart = Date.now();
@@ -37,6 +39,10 @@ const start = async () => {
 
       if (event.event.room_id !== whatsAppRoomId) {
         return; // don't activate unless in the active room
+      }
+
+      if (event.getType() === "m.room.member" && event.getContent().membership === 'join' ) {
+        greetNewJoiner(event, room);
       }
 
       if (

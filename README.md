@@ -4,6 +4,10 @@ Example app for Matrix chat integration tools.
 
 This app keeps track of roles within a group chat. It has a keyword that the app responds to ("example") and then the rest of the interface is put together from emoji reactions and replies.
 
+It also greets new members of a room with the message:
+
+> Hi welcome USER_NAME to the ROOM_NAME chat! Would you mind introducing yourself? 👋
+
 ## Getting started
 
 1. Clone the repo or fork the REPL
