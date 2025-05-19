@@ -18,8 +18,19 @@ It is a fork of https://github.com/King-Mob/example-matrix-tool so also this app
 1. Start conversation with @whatsappbot on a homeserver (find homeserver url at in-person event) and follow the login process
 1. Open the WhatsApp chat you want to connect to through Element
 1. Copy the room id of the WhatsApp chat into the `.env` file
-1. Run the command `npm install`
-1. Run the command `npm run dev`
+1. Create your venv:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
+1. Install Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+1. Run the application:
+   ```bash
+   python main.py
+   ```
 1. Ask your testing buddy to send "hello" to the WhatsApp group
 1. Marvel in delight at your newfound power
 
